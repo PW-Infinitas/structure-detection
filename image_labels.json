@@ -1,0 +1,378 @@
+{
+  "test_images/payslip1.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ]
+  },
+  "test_images/payslip10.jpeg": {
+    "label": "authentic",
+    "label_signals": []
+  },
+  "test_images/payslip2.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ]
+  },
+  "test_images/payslip20.png": {
+    "label": "authentic",
+    "label_signals": []
+  },
+  "test_images/payslip3.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ]
+  },
+  "test_images/payslip30.png": {
+    "label": "authentic",
+    "label_signals": []
+  },
+  "test_images/First_Tamper.png": {
+    "label": "authentic",
+    "label_signals": []
+  },
+  "test_images/first-tamper.png": {
+    "label": "tampered",
+    "label_signals": [
+      "background_overlay",
+      "font_weight_inconsistency"
+    ]
+  },
+  "test_images/pink.png": {
+    "label": "tampered",
+    "label_signals": [
+      "background_overlay",
+      "font_weight_inconsistency"
+    ]
+  },
+  "test_images/combined.png": {
+    "label": "tampered",
+    "label_signals": [
+      "background_overlay",
+      "font_weight_inconsistency"
+    ]
+  },
+  "test_images/neat.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "baseline_mismatch"
+    ]
+  },
+  "test_images/neatest.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency"
+    ]
+  },
+  "test_images/cropped-obvious.png": {
+    "label": "tampered",
+    "label_signals": [
+      "background_overlay",
+      "font_weight_inconsistency",
+      "baseline_mismatch"
+    ]
+  },
+  "test_images_augmented/by_technique/payslip2_rotation.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "rotation"
+  },
+  "test_images_augmented/by_technique/payslip2_perspective.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "perspective"
+  },
+  "test_images_augmented/by_technique/payslip2_elastic_distortion.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "elastic_distortion"
+  },
+  "test_images_augmented/by_technique/payslip2_crop_and_pad.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "crop_and_pad"
+  },
+  "test_images_augmented/by_technique/payslip2_jpeg_compression.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "jpeg_compression"
+  },
+  "test_images_augmented/by_technique/payslip2_gaussian_blur.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "gaussian_blur"
+  },
+  "test_images_augmented/by_technique/payslip2_shadow_vignette.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "shadow_vignette"
+  },
+  "test_images_augmented/by_technique/payslip30_rotation.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "rotation"
+  },
+  "test_images_augmented/by_technique/payslip30_perspective.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "perspective"
+  },
+  "test_images_augmented/by_technique/payslip30_elastic_distortion.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "elastic_distortion"
+  },
+  "test_images_augmented/by_technique/payslip30_crop_and_pad.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "crop_and_pad"
+  },
+  "test_images_augmented/by_technique/payslip30_jpeg_compression.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "jpeg_compression"
+  },
+  "test_images_augmented/by_technique/payslip30_gaussian_blur.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "gaussian_blur"
+  },
+  "test_images_augmented/by_technique/payslip30_shadow_vignette.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "shadow_vignette"
+  },
+  "test_images_augmented/by_technique/payslip10_rotation.jpeg": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "rotation"
+  },
+  "test_images_augmented/by_technique/payslip10_perspective.jpeg": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "perspective"
+  },
+  "test_images_augmented/by_technique/payslip10_elastic_distortion.jpeg": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "elastic_distortion"
+  },
+  "test_images_augmented/by_technique/payslip10_crop_and_pad.jpeg": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "crop_and_pad"
+  },
+  "test_images_augmented/by_technique/payslip10_jpeg_compression.jpeg": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "jpeg_compression"
+  },
+  "test_images_augmented/by_technique/payslip10_gaussian_blur.jpeg": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "gaussian_blur"
+  },
+  "test_images_augmented/by_technique/payslip10_shadow_vignette.jpeg": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "shadow_vignette"
+  },
+  "test_images_augmented/by_technique/payslip1_rotation.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "rotation"
+  },
+  "test_images_augmented/by_technique/payslip1_perspective.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "perspective"
+  },
+  "test_images_augmented/by_technique/payslip1_elastic_distortion.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "elastic_distortion"
+  },
+  "test_images_augmented/by_technique/payslip1_crop_and_pad.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "crop_and_pad"
+  },
+  "test_images_augmented/by_technique/payslip1_jpeg_compression.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "jpeg_compression"
+  },
+  "test_images_augmented/by_technique/payslip1_gaussian_blur.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "gaussian_blur"
+  },
+  "test_images_augmented/by_technique/payslip1_shadow_vignette.jpeg": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "shadow_vignette"
+  },
+  "test_images_augmented/by_technique/payslip20_rotation.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "rotation"
+  },
+  "test_images_augmented/by_technique/payslip20_perspective.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "perspective"
+  },
+  "test_images_augmented/by_technique/payslip20_elastic_distortion.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "elastic_distortion"
+  },
+  "test_images_augmented/by_technique/payslip20_crop_and_pad.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "crop_and_pad"
+  },
+  "test_images_augmented/by_technique/payslip20_jpeg_compression.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "jpeg_compression"
+  },
+  "test_images_augmented/by_technique/payslip20_gaussian_blur.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "gaussian_blur"
+  },
+  "test_images_augmented/by_technique/payslip20_shadow_vignette.png": {
+    "label": "authentic",
+    "label_signals": [],
+    "augmentation": "shadow_vignette"
+  },
+  "test_images_augmented/by_technique/payslip3_rotation.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "rotation"
+  },
+  "test_images_augmented/by_technique/payslip3_perspective.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "perspective"
+  },
+  "test_images_augmented/by_technique/payslip3_elastic_distortion.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "elastic_distortion"
+  },
+  "test_images_augmented/by_technique/payslip3_crop_and_pad.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "crop_and_pad"
+  },
+  "test_images_augmented/by_technique/payslip3_jpeg_compression.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "jpeg_compression"
+  },
+  "test_images_augmented/by_technique/payslip3_gaussian_blur.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "gaussian_blur"
+  },
+  "test_images_augmented/by_technique/payslip3_shadow_vignette.png": {
+    "label": "tampered",
+    "label_signals": [
+      "font_weight_inconsistency",
+      "font_size_mismatch",
+      "color_contrast_discontinuity"
+    ],
+    "augmentation": "shadow_vignette"
+  }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ css_path | default('styles.css') }}">
+    <title>หนังสือราชการ</title>
+</head>
+<body>
+    <div class="document">
+
+        <!-- Header: ref-id left | garuda center | agency right -->
+        <div class="header">
+            <div class="header-left">
+                <div class="ref-id">ที่ {{ ref_id }}</div>
+            </div>
+            <div class="header-center">
+                <img class="garuda" src="{{ garuda_path }}" alt="ตราครุฑ">
+            </div>
+            <div class="header-right">
+                <div class="agency">{{ agency }}</div>
+            </div>
+        </div>
+
+        <!-- Date: right-aligned, Thai Buddhist Era format -->
+        <div class="date-block">{{ date }}</div>
+
+        <!-- Subject / Recipient / Attachments -->
+        <div class="meta-block">
+            <div class="meta-line">
+                <span class="meta-label">เรื่อง</span>
+                <span class="meta-value">{{ subject }}</span>
+            </div>
+            <div class="meta-line">
+                <span class="meta-label">เรียน</span>
+                <span class="meta-value">{{ recipient }}</span>
+            </div>
+            {% if attachments %}
+            <div class="meta-line">
+                <span class="meta-label">สิ่งที่ส่งมาด้วย</span>
+                <span class="meta-value">{{ attachments }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Body paragraphs: indented + justified -->
+        <div class="body-text">
+            {% for paragraph in body_paragraphs %}
+            <p>{{ paragraph }}</p>
+            {% endfor %}
+        </div>
+
+        <!-- Closing block -->
+        <div class="closing-block">
+            <div class="salutation">ขอแสดงความนับถือ</div>
+            <div class="signature-area">
+                <div class="signature-handwritten">{{ signature_name }}</div>
+                <div class="printed-name">({{ printed_name }})</div>
+                <div class="official-title">{{ title }}</div>
+            </div>
+        </div>
+
+        <!-- Footer: contact info below a rule -->
+        <div class="footer-block">
+            <div class="footer-dept">{{ responsible_dept }}</div>
+            <div class="footer-contact">
+                <span>โทร. {{ phone }}</span>
+                <span class="sep">|</span>
+                <span>โทรสาร {{ fax }}</span>
+                {% if email %}
+                <span class="sep">|</span>
+                <span>ไปรษณีย์อิเล็กทรอนิกส์ {{ email }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

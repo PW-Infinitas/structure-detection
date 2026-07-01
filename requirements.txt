@@ -1,0 +1,8 @@
+playwright
+jinja2
+opencv-python
+pillow
+numpy
+google-cloud-vision
+openai
+anthropic

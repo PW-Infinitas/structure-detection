@@ -1,0 +1,5 @@
+The attached image is a synthetic financial or employment document (e.g., a payslip) provided for research purposes. 
+
+Your task: Determine whether specific text values or their immediate backgrounds were digitally altered (spliced, pasted, or cloned) after the document's initial generation/recapture. Evaluate visual signals only.
+
+Apply your forensic chain of reasoning and output the result strictly in the required JSON format.

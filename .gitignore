@@ -1,0 +1,40 @@
+# Virtual environments
+infinitas/
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Augraphy texture cache
+augraphy_cache/
+
+# Generator temp file
+generator/_render_temp.html
+
+# Generated document images (large binary outputs)
+mock_data/positive/
+mock_data/negative/
+
+# Experiment results (regenerable from sweeps)
+notebook_results/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# API keys / secrets
+.env
+*.env

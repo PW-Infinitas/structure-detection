@@ -1,0 +1,242 @@
+/* ============================================================
+   Thai Government Letter (หนังสือราชการ) — Print Layout
+   A4: 210mm × 297mm | Margins: 2.5cm | Font: TH Sarabun New 16pt
+   ============================================================ */
+
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../assets/fonts/THSarabunNew.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../assets/fonts/THSarabunNew-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LayijiHandwriting';
+    src: url('../assets/fonts/LayijiHandwriting.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Page setup for WeasyPrint / Playwright PDF --- */
+@page {
+    size: A4 portrait;
+    margin: 2.5cm;
+}
+
+/* --- Screen wrapper (grey background so the white page floats) --- */
+body {
+    font-family: 'THSarabunNew', 'TH Sarabun New', serif;
+    font-size: 16pt;
+    line-height: 1.5;
+    color: #000;
+    background: #d8d8d8;
+}
+
+/* --- Page canvas --- */
+.document {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 2.5cm;
+    background: #fff;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* ============================================================
+   HEADER
+   Layout: ref-id (left) | garuda (center) | agency (right)
+   The ref-id and agency are vertically centred against the Garuda.
+   ============================================================ */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 95px;
+    margin-bottom: 6px;
+}
+
+.header-left,
+.header-right {
+    flex: 1;
+}
+
+.header-center {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 0 12px;
+}
+
+.header-left  { text-align: left; }
+.header-right { text-align: right; }
+
+.ref-id {
+    font-size: 16pt;
+    line-height: 1.4;
+}
+
+.garuda {
+    height: 95px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.agency {
+    font-size: 16pt;
+    line-height: 1.4;
+}
+
+/* ============================================================
+   DATE BLOCK
+   Thai Buddhist Era format — centre-right of the page.
+   In practice this means right-aligned within the content area.
+   ============================================================ */
+.date-block {
+    text-align: right;
+    font-size: 16pt;
+    margin-bottom: 14px;
+}
+
+/* ============================================================
+   META BLOCK  (เรื่อง / เรียน / สิ่งที่ส่งมาด้วย)
+   Labels are fixed-width so the values all start at the same column.
+   "สิ่งที่ส่งมาด้วย" is the widest label (~4.5 cm at 16pt).
+   ============================================================ */
+.meta-block {
+    margin-bottom: 10px;
+}
+
+.meta-line {
+    display: flex;
+    align-items: baseline;
+    font-size: 16pt;
+    line-height: 1.5;
+}
+
+.meta-label {
+    min-width: 4.6cm;
+    flex-shrink: 0;
+}
+
+.meta-value {
+    flex: 1;
+}
+
+/* ============================================================
+   BODY TEXT
+   First-line indent 2.5 cm, fully justified inter-character.
+   ============================================================ */
+.body-text {
+    margin-top: 8px;
+}
+
+.body-text p {
+    font-size: 16pt;
+    line-height: 1.5;
+    text-align: justify;
+    text-justify: inter-character;
+    text-indent: 2.5cm;
+    margin-bottom: 0;
+}
+
+/* ============================================================
+   CLOSING BLOCK
+   "ขอแสดงความนับถือ" centered; signature on the right half.
+   ============================================================ */
+.closing-block {
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.salutation {
+    font-size: 16pt;
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.signature-area {
+    float: right;
+    width: 50%;
+    text-align: center;
+}
+
+.signature-handwritten {
+    font-family: 'LayijiHandwriting', cursive;
+    color: #0d3895;
+    font-size: 26px;
+    transform: rotate(-3deg);
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.printed-name {
+    font-size: 16pt;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.official-title {
+    font-size: 16pt;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* ============================================================
+   FOOTER  (contact info below a thin rule)
+   ============================================================ */
+.footer-block {
+    clear: both;
+    margin-top: 28px;
+    padding-top: 5px;
+    border-top: 1px solid #000;
+    font-size: 14pt;
+    line-height: 1.5;
+}
+
+.footer-dept {
+    font-size: 14pt;
+}
+
+.footer-contact {
+    font-size: 14pt;
+    margin-top: 2px;
+}
+
+.sep {
+    margin: 0 6px;
+    color: #555;
+}
+
+/* ============================================================
+   PRINT OVERRIDES
+   When WeasyPrint/Playwright renders to PDF, strip the grey bg.
+   ============================================================ */
+@media print {
+    body {
+        background: #fff;
+    }
+
+    .document {
+        width: 100%;
+        min-height: auto;
+        padding: 0;
+        margin: 0;
+    }
+}
