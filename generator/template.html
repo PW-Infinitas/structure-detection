@@ -8,23 +8,28 @@
 <body>
     <div class="document">
 
-        <!-- Header: ref-id left | garuda center | agency right -->
+        <!-- Header: garuda centered, header title below it, then ref-id/agency row top-aligned -->
         <div class="header">
-            <div class="header-left">
-                <div class="ref-id">ที่ {{ ref_id }}</div>
-            </div>
-            <div class="header-center">
+            <div class="header-garuda">
                 <img class="garuda" src="{{ garuda_path }}" alt="ตราครุฑ">
             </div>
-            <div class="header-right">
-                <div class="agency">{{ agency }}</div>
+            <div class="header-title">{{ header_title }}</div>
+            <div class="header-meta">
+                <div class="header-left">
+                    <div class="ref-id"><span class="handwritten">ที่ {{ ref_id }}</span></div>
+                </div>
+                <div class="header-right">
+                    {% for line in agency %}
+                    <div class="agency">{{ line }}</div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
 
-        <!-- Date: right-aligned, Thai Buddhist Era format -->
-        <div class="date-block">{{ date }}</div>
+        <!-- Date: centered, Thai Buddhist Era format -->
+        <div class="date-block"><span class="handwritten">{{ date }}</span></div>
 
-        <!-- Subject / Recipient / Attachments -->
+        <!-- Subject / Recipient / (optional) Reference — เรื่อง, เรียน, then อ้างถึง if present -->
         <div class="meta-block">
             <div class="meta-line">
                 <span class="meta-label">เรื่อง</span>
@@ -32,20 +37,33 @@
             </div>
             <div class="meta-line">
                 <span class="meta-label">เรียน</span>
-                <span class="meta-value">{{ recipient }}</span>
+                <span class="meta-value handwritten">{{ recipient }}</span>
             </div>
-            {% if attachments %}
+            {% if reference %}
             <div class="meta-line">
-                <span class="meta-label">สิ่งที่ส่งมาด้วย</span>
-                <span class="meta-value">{{ attachments }}</span>
+                <span class="meta-label">อ้างถึง</span>
+                <span class="meta-value">{{ reference }}</span>
             </div>
             {% endif %}
         </div>
 
-        <!-- Body paragraphs: indented + justified -->
+        <!-- Body: indented/justified paragraphs, optionally interleaved with tables -->
         <div class="body-text">
-            {% for paragraph in body_paragraphs %}
-            <p>{{ paragraph }}</p>
+            {% for block in body_blocks %}
+                {% if block.type == 'paragraph' %}
+                <p>{{ block.text }}</p>
+                {% elif block.type == 'table' %}
+                <table class="body-table">
+                    <tr class="body-table-header">
+                        {% for col in block.columns %}<th>{{ col }}</th>{% endfor %}
+                    </tr>
+                    {% for row in block.rows %}
+                    <tr>
+                        {% for cell in row %}<td>{{ cell }}</td>{% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
             {% endfor %}
         </div>
 
@@ -53,25 +71,24 @@
         <div class="closing-block">
             <div class="salutation">ขอแสดงความนับถือ</div>
             <div class="signature-area">
-                <div class="signature-handwritten">{{ signature_name }}</div>
+                <div class="signature-line">
+                    {% if signer_rank %}<span class="signer-rank">{{ signer_rank }}</span>{% endif %}
+                    <span class="signature-handwritten">{{ signature_name }}</span>
+                </div>
                 <div class="printed-name">({{ printed_name }})</div>
                 <div class="official-title">{{ title }}</div>
             </div>
         </div>
 
-        <!-- Footer: contact info below a rule -->
+        <!-- Footer: pinned bottom-left, one contact item per line. Omitted entirely if no contact info given. -->
+        {% if responsible_dept or phone or fax or email %}
         <div class="footer-block">
-            <div class="footer-dept">{{ responsible_dept }}</div>
-            <div class="footer-contact">
-                <span>โทร. {{ phone }}</span>
-                <span class="sep">|</span>
-                <span>โทรสาร {{ fax }}</span>
-                {% if email %}
-                <span class="sep">|</span>
-                <span>ไปรษณีย์อิเล็กทรอนิกส์ {{ email }}</span>
-                {% endif %}
-            </div>
+            {% if responsible_dept %}<div class="footer-contact-line">{{ responsible_dept }}</div>{% endif %}
+            {% if phone %}<div class="footer-contact-line">โทร. {{ phone }}</div>{% endif %}
+            {% if fax %}<div class="footer-contact-line">โทรสาร {{ fax }}</div>{% endif %}
+            {% if email %}<div class="footer-contact-line">ไปรษณีย์อิเล็กทรอนิกส์ {{ email }}</div>{% endif %}
         </div>
+        {% endif %}
 
     </div>
 </body>

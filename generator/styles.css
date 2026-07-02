@@ -24,6 +24,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Charmonman';
+    src: url('../assets/fonts/Charmonman.ttc') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* --- Reset --- */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -40,7 +47,7 @@
 /* --- Screen wrapper (grey background so the white page floats) --- */
 body {
     font-family: 'THSarabunNew', 'TH Sarabun New', serif;
-    font-size: 16pt;
+    font-size: 13pt;
     line-height: 1.5;
     color: #000;
     background: #d8d8d8;
@@ -58,35 +65,18 @@ body {
 
 /* ============================================================
    HEADER
-   Layout: ref-id (left) | garuda (center) | agency (right)
-   The ref-id and agency are vertically centred against the Garuda.
+   Layout: garuda (centered) → header title (centered) →
+   ref-id (top-left) | agency (top-right).
+   Ref-id and agency align to the top of their row, not to the
+   Garuda's vertical middle.
    ============================================================ */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
-    min-height: 95px;
     margin-bottom: 6px;
 }
 
-.header-left,
-.header-right {
-    flex: 1;
-}
-
-.header-center {
-    flex: 0 0 auto;
+.header-garuda {
     text-align: center;
-    padding: 0 12px;
-}
-
-.header-left  { text-align: left; }
-.header-right { text-align: right; }
-
-.ref-id {
-    font-size: 16pt;
-    line-height: 1.4;
 }
 
 .garuda {
@@ -96,19 +86,56 @@ body {
     margin: 0 auto;
 }
 
+.header-title {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 6px 0 14px;
+}
+
+.header-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-left {
+    flex: 0 0 auto;
+    text-align: left;
+}
+
+.header-right {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.ref-id {
+    font-size: 13pt;
+    line-height: 1.4;
+}
+
+/* Handwritten style — applied to sections filled in by hand (date, ref-id, recipient) */
+.handwritten {
+    font-family: 'Charmonman', cursive;
+    color: #1a1a5e;
+    font-size: 13pt;
+    line-height: 1.4;
+}
+
 .agency {
-    font-size: 16pt;
+    font-size: 13pt;
     line-height: 1.4;
 }
 
 /* ============================================================
    DATE BLOCK
-   Thai Buddhist Era format — centre-right of the page.
-   In practice this means right-aligned within the content area.
+   Thai Buddhist Era format — centered within the content area.
+   Does not need to align with the Garuda emblem's tail.
    ============================================================ */
 .date-block {
-    text-align: right;
-    font-size: 16pt;
+    text-align: center;
+    font-size: 13pt;
     margin-bottom: 14px;
 }
 
@@ -124,7 +151,7 @@ body {
 .meta-line {
     display: flex;
     align-items: baseline;
-    font-size: 16pt;
+    font-size: 13pt;
     line-height: 1.5;
 }
 
@@ -146,12 +173,27 @@ body {
 }
 
 .body-text p {
-    font-size: 16pt;
+    font-size: 13pt;
     line-height: 1.5;
     text-align: justify;
     text-justify: inter-character;
     text-indent: 2.5cm;
     margin-bottom: 0;
+}
+
+/* Optional table inside the body (e.g. applicant name / loan amount) */
+.body-table {
+    width: calc(100% - 2.5cm);
+    margin: 10px 0 10px 2.5cm;
+    border-collapse: collapse;
+}
+
+.body-table th,
+.body-table td {
+    font-size: 13pt;
+    font-weight: normal;
+    text-align: center;
+    padding: 3px 20px;
 }
 
 /* ============================================================
@@ -164,22 +206,34 @@ body {
 }
 
 .salutation {
-    font-size: 16pt;
+    font-size: 13pt;
     text-align: center;
     margin-bottom: 56px;
 }
 
 .signature-area {
-    float: right;
-    width: 50%;
+    margin-left: auto;
+    width: fit-content;
+    max-width: 85%;
     text-align: center;
 }
 
+.signature-line {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.signer-rank {
+    font-size: 13pt;
+    line-height: 1.4;
+}
+
 .signature-handwritten {
-    font-family: 'LayijiHandwriting', cursive;
+    font-family: 'Charmonman', cursive;
     color: #0d3895;
-    font-size: 26px;
-    transform: rotate(-3deg);
+    font-size: 22px;
+    transform: rotate(-2deg);
     display: inline-block;
     margin-left: 10px;
     margin-bottom: 6px;
@@ -187,41 +241,34 @@ body {
 }
 
 .printed-name {
-    font-size: 16pt;
+    font-size: 13pt;
     line-height: 1.4;
     text-align: center;
 }
 
 .official-title {
-    font-size: 16pt;
+    font-size: 13pt;
     line-height: 1.4;
     text-align: center;
 }
 
 /* ============================================================
-   FOOTER  (contact info below a thin rule)
+   FOOTER  (pinned to bottom-left of content area, stacked lines)
    ============================================================ */
 .footer-block {
-    clear: both;
-    margin-top: 28px;
+    position: absolute;
+    bottom: 2.5cm;
+    left: 2.5cm;
+    right: 2.5cm;
     padding-top: 5px;
     border-top: 1px solid #000;
-    font-size: 14pt;
-    line-height: 1.5;
+    font-size: 11pt;
+    line-height: 1.8;
 }
 
-.footer-dept {
-    font-size: 14pt;
-}
-
-.footer-contact {
-    font-size: 14pt;
-    margin-top: 2px;
-}
-
-.sep {
-    margin: 0 6px;
-    color: #555;
+.footer-contact-line {
+    font-size: 11pt;
+    display: block;
 }
 
 /* ============================================================

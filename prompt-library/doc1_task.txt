@@ -1,0 +1,5 @@
+The attached image is a Thai official document — a "หนังสือรับรองหักเงินเดือน" (Salary Deduction Certificate) — provided for structure validation purposes.
+
+Your task: Determine whether the document's structural integrity, spatial alignment, and logical consistency conform to the official template. Evaluate visual and textual signals only.
+
+Apply your chain of reasoning and output the result strictly in the required JSON format.

@@ -84,25 +84,47 @@ Work through these **one phase at a time**. Do not move to the next phase until 
 
 **Goal:** Render realistic Thai government letters as high-res PNGs and verify they conform to official layout standards.
 
-**Status:** `template.html` and `styles.css` complete. Assets in place. `engine.py` not yet written.
+**Status:** `template.html`, `styles.css`, and `engine.py` updated to comply with the spatial rules and verification rules below (header title, top-aligned ref-id/agency, centered date, optional อ้างถึง, optional in-body tables, optional signer rank, optional bottom-left contact footer).
 
-#### 1.1 CSS Layout Specifications
+#### 1.1 Document Layout & Spatial Rules
 
-Official Thai government letters (A4 format) follow a strict structural protocol:
+Refer to the following spatial rules (loosely mapped to a grid layout):
+- **Top Center:** Garuda emblem (ตราครุฑ) must be present. Position can shift slightly.
+- **Below Garuda (Centered):** Header/Title must read "หนังสือรับรองหักเงินเดือน" or "หนังสือรับรองเรื่องการหักเงินเดือน".
+- **Top Left (aligned with top of content):** Must start with the word "ที่" followed by the document/reference number.
+- **Top Right (aligned with top of content):** Must contain either the Agency Name ("หน่วยงาน") or Agency Address ("ที่อยู่หน่วยงาน") (at least one is required).
+- **Below Top-Left/Right Blocks (Centered/Right-of-Center):** Document date. Note: The date does not need to align perfectly with the tail of the Garuda emblem ("วันที่ไม่ต้องตรงหางครุฑเสมอไป").
+- **Middle Left (Vertical Stack):**
+  - "เรื่อง..." (Subject) must come first.
+  - "เรียน..." (Recipient) must come directly below "เรื่อง...".
+  - "อ้างถึง..." (Reference) is optional and must come below "เรียน..." if present.
+- **Center/Body Block:** Main paragraph. Must contain the following phrases (which may be printed or handwritten):
+  - "มีคุณสมบัติเหมาะสม"
+  - "ยินดีให้ความร่วมมือหักเงินเดือน"
+  - *Note: No other content in the body should be validated except these required phrases.*
+- **Bottom Left (Optional):** "ส่วนราชการเจ้าของเรื่อง", "โทร.", "โทรสาร", and "ไปรษณีย์อิเล็กทรอนิกส์" (Optional contact info).
+- **Bottom Right (Closing Block - Must be complete):**
+  - คำลงท้าย (e.g., "ขอแสดงความนับถือ")
+  - ลายเซ็น (handwritten physical signature)
+  - (พิมพ์ชื่อเต็ม) (printed full name wrapped in parentheses)
+  - ตำแหน่ง (official position)
 
-- **Dimensions:** Standard A4 (210mm × 297mm) with 2.5cm margins.
-- **Header Line:**
-  - The Garuda Emblem (ตราครุฑ) is centered at the top.
-  - The Reference ID (เลขที่หนังสือ) starting with `ที่` must align to the far-left, on the same vertical baseline as the middle of the Garuda.
-  - The Issuing Agency (ส่วนราชการ) must align to the far-right.
-- **Date Block:** Located at the center-right of the page below the header, written in Thai Buddhist Era format (e.g., `23 ส.ค. 2569`).
-- **Subject & Recipient Block:**
-  - เรื่อง (Subject) aligns to the left margin.
-  - เรียน (Recipient) aligns to the left margin, exactly below เรื่อง.
-- **Body:** Paragraphs with a defined hanging indent (~2.5cm), justified text (`text-align: justify; text-justify: inter-character;`).
-- **Signature Block:** Bottom right. Closing statement (ขอแสดงความนับถือ) → handwritten signature → printed name in parentheses → official title.
+#### 1.2 Verification Rules (1-9)
 
-#### 1.2 Signature Simulation
+1. **Rule 1 (ตราครุฑ):** Must have the Garuda emblem at the top center.
+2. **Rule 2 (หัวเรื่อง):** Must have the main header text "หนังสือรับรองหักเงินเดือน" or "หนังสือรับรองเรื่องการหักเงินเดือน".
+3. **Rule 3 (ที่ และ หน่วยงาน):** Top-left starts with "ที่" + number. Top-right must have at least one: Agency Name or Agency Address.
+4. **Rule 4 (วันที่):** Must have a valid Thai date present.
+5. **Rule 5 (เรื่อง / เรียน / อ้างถึง):** Must have "เรื่อง..." followed by "เรียน...". Optional "อ้างถึง..." below them.
+6. **Rule 6 (เนื้อหา/Body):** The body text must contain "มีคุณสมบัติเหมาะสม" AND "ยินดีให้ความร่วมมือหักเงินเดือน".
+7. **Rule 7 (คำลงท้ายและลายเซ็น):** Bottom-right closing block must contain: formal closing word, physical handwritten signature, printed full name in parentheses, and official position.
+8. **Rule 8 (ข้อมูลติดต่อ - Optional):** Bottom-left section containing contact details (ส่วนราชการเจ้าของเรื่อง, โทร., โทรสาร, ไปรษณีย์อิเล็กทรอนิกส์) is optional but if present, must be located at the bottom-left.
+9. **Rule 9 (หน่วยงานตรงกัน & ปี พ.ศ.):**
+   - The issuing agency name ("หน่วยงานที่ออกเอกสารรับรอง") must match exactly across the entire page (e.g., top-right header, body text, and closing position block).
+   - The date must be in Buddhist Era format only (พ.ศ.).
+   - The document date must be within a realistic/possible year (i.e., not an impossible future year relative to the current timeframe).
+
+#### 1.3 Signature Simulation
 
 ```css
 .signature-handwritten {
@@ -115,20 +137,23 @@ Official Thai government letters (A4 format) follow a strict structural protocol
 }
 ```
 
-#### 1.3 `engine.py` — What to Build
+#### 1.4 `engine.py` — What to Build
 
 - Load `template.html` + `styles.css` via Playwright.
-- Inject a mock data dict (ref_id, agency, date, subject, recipient, body_paragraphs, signature_name, printed_name, title) using Jinja2.
+- Inject a mock data dict (ref_id, agency [list of lines], header_title, date, subject, recipient, reference, body_blocks [paragraph/table entries], signer_rank, signature_name, printed_name, title, responsible_dept/phone/fax/email) using Jinja2.
 - Render to a high-res PNG (A4 at 150–200 DPI equivalent).
 - Output to `mock_data/positive/` or `mock_data/negative/` depending on the data variant.
 
 #### Phase 1 Gate
 
 Before proceeding to Phase 2: visually inspect at least one rendered PNG and confirm:
-- Garuda centered, ref-id far-left, agency far-right on the same horizontal baseline
-- Date block right-aligned
-- เรื่อง / เรียน left-aligned and in correct vertical order
-- Signature block in the lower-right quadrant
+- Garuda centered at the top, with the header title directly below it
+- ที่/reference number top-left and agency name/address top-right, both aligned to the top of the content block (not centered against the Garuda)
+- Date centered below the ที่/agency row (does not need to align with the Garuda)
+- เรื่อง / เรียน / (optional) อ้างถึง left-aligned and in correct vertical order
+- Body contains the required phrases when generating a positive-class document
+- Closing block complete (คำลงท้าย, ลายเซ็น, พิมพ์ชื่อเต็ม, ตำแหน่ง) in the lower-right quadrant
+- Bottom-left contact block only present when contact info is supplied
 - Thai text renders correctly in TH Sarabun New
 
 ---
